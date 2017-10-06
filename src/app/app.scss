@@ -27,3 +27,16 @@
 .disable-hover bar-buttons bar-buttons-md bar-button bar-button-md bar-button-default bar-button-default-md bar-button-menutoggle bar-button-menutoggle-md {
     background-color: #8d5854;
 }
+
+@font-face {
+  font-family: OpenSans;
+  src:url('../assets/fonts/OpenSans-Regular.woff') format('woff');
+}
+
+* {
+  font-family: OpenSans;
+}
+
+.toolbar-title {
+  font-family: Roboto;
+}

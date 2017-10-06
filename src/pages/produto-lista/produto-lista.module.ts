@@ -7,7 +7,6 @@ import { ProdutoListaPage } from './produto-lista';
 @NgModule({
   declarations: [ProdutoListaPage],
   imports: [IonicPageModule.forChild(ProdutoListaPage)],
-  exports: [ProdutoListaPageModule],
   providers: [ProdutoProvider]
 })
-export class ProdutoListaPageModule {}
+export class ProdutoListaPageModule { }

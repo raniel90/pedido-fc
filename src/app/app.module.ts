@@ -1,16 +1,18 @@
 import { ErrorHandler, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MyApp } from './app.component';
 
 @NgModule({
   declarations: [MyApp],
-  imports: [BrowserModule, IonicModule.forRoot(MyApp), HttpModule],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp), HttpModule, FormsModule, ReactiveFormsModule],
   bootstrap: [IonicApp],
   entryComponents: [MyApp],
   providers: [
@@ -20,4 +22,4 @@ import { MyApp } from './app.component';
     BarcodeScanner
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -4,9 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ProdutoProvider } from './../../providers/produto/produto';
 
-@IonicPage({
-  name: "ProdutoListaPage"
-})
+@IonicPage()
 @Component({
   selector: "page-produto-lista",
   templateUrl: "produto-lista.html"
@@ -14,19 +12,21 @@ import { ProdutoProvider } from './../../providers/produto/produto';
 export class ProdutoListaPage {
   produtos = [];
   comments = [];
+  exibeBarcodeScanner: boolean = false
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private produtoProvider: ProdutoProvider,
     private barcodeScanner: BarcodeScanner
-  ) {}
+  ) { }
 
   ionViewCanEnter() {
     console.log("entrou ionViewCanEnter");
   }
 
   async ionViewDidLoad() {
+
     console.log("entrou ionViewDidLoad");
     try {
       this.produtos = await this.produtoProvider.get("/posts");

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="white">
+    <button ion-button menuToggle>
+            <ion-icon color="exemplo" name="menu"></ion-icon>
+          </button>
+    <ion-title>Input Event</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label color="fc" floating>Input Event</ion-label>
+        <ion-input (keyup)="exibirValorDigitado($event)" type="text"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  {{valorDigitado}}
+
+</ion-content>

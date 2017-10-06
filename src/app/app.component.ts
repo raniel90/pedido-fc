@@ -22,7 +22,10 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: "Lista de Produtos", component: "ProdutoListaPage" }
+      { title: "Lista de Produtos", component: "ProdutoListaPage" },
+      { title: "Input Event", component: "InputEventPage" },
+      { title: "Template Form", component: "TemplateFormPage" },
+      { title: "Reactive Form", component: "ReactiveFormPage" },
     ];
   }
 

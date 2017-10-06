@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="white">
+    <button ion-button menuToggle>
+            <ion-icon color="exemplo" name="menu"></ion-icon>
+          </button>
+    <ion-title>Template Form</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+
+  <form (ngSubmit)="onSubmit()" #clienteForm="ngForm">
+    <ion-grid>
+      <ion-item>
+        <ion-label color="fc" floating>Razão Social</ion-label>
+        <ion-input [(ngModel)]="model.razaoSocial" name="razaoSocial" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="fc" floating>Telefone</ion-label>
+        <ion-input [(ngModel)]="model.telefone" name="telefone" type="tel"></ion-input>
+      </ion-item>
+    </ion-grid>
+
+    <button [disabled]="!clienteForm.form.valid" ion-button full outline>Salvar cliente</button>
+  </form>
+
+</ion-content>

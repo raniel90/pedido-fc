@@ -1,35 +1,31 @@
-<!--
 <ion-header>
-    <ion-navbar color="white">
-        <button ion-button menuToggle>
+  <ion-navbar color="white">
+    <button ion-button menuToggle>
           <ion-icon color="exemplo" name="menu"></ion-icon>
         </button>
-        <ion-title>Pedido FC</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="openBarcode()">
+    <ion-title>Pedido FC</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openBarcode()">
         <ion-icon color="exemplo" name="md-barcode"></ion-icon>
       </button>
-        </ion-buttons>
+    </ion-buttons>
 
-    </ion-navbar>
+  </ion-navbar>
 
 </ion-header>
--->
 
 <ion-content no-padding>
-    <!--
-    <ion-searchbar></ion-searchbar>
-      -->
 
-    <ion-row padding *ngFor="let comment of comments">
-        <ion-col>
-            {{comment.name}}
-        </ion-col>
-        <ion-col>
-            <button (click)="detalharProduto(comment)" ion-button color="fc">Detalhar produto</button>
-        </ion-col>
-    </ion-row>
+  <ion-searchbar></ion-searchbar>
 
+  <ion-row padding *ngFor="let comment of comments">
+    <ion-col>
+      {{comment.name}}
+    </ion-col>
+    <ion-col>
+      <button (click)="detalharProduto(comment)" ion-button color="fc">Detalhar produto</button>
+    </ion-col>
+  </ion-row>
 
 
 </ion-content>

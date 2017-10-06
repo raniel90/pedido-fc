@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar color="white">
+    <button ion-button menuToggle>
+              <ion-icon color="exemplo" name="menu"></ion-icon>
+            </button>
+    <ion-title>Reactive Form</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+
+  <form [formGroup]="clienteForm">
+    <ion-grid>
+      <ion-item>
+        <ion-label color="fc" floating>Razão Social</ion-label>
+        <ion-input formControlName="razaoSocial" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="fc" floating>E-mail</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+
+      <div formArrayName="telefones" *ngFor="let item of clienteForm.get('telefones').controls; let i = index;">
+        <div [formGroupName]="i">
+          <ion-row>
+            <ion-col col-3>
+              <ion-item>
+                <ion-label color="fc" floating>DDD</ion-label>
+                <ion-input formControlName="ddd" type="number"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col col-7>
+              <ion-item>
+                <ion-label color="fc" floating>Telefone</ion-label>
+                <ion-input formControlName="numero" type="number"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col (click)="adicionarTelefone()" align="center" style="margin-top:7%">
+              <button [disabled]="item.status=='INVALID'" style="border-radius:100%;width:80% " ion-button icon-only>
+                    <ion-icon name="add"></ion-icon>
+                  </button>
+            </ion-col>
+
+          </ion-row>
+        </div>
+      </div>
+    </ion-grid>
+
+
+
+    <button (click)="onSubmit() " [disabled]="clienteForm.status=='INVALID' " ion-button full outline>Salvar cliente</button>
+  </form>
+
+</ion-content>
