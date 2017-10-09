@@ -3,6 +3,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Nav, Platform } from 'ionic-angular';
 
+import { DatabaseProvider } from './../providers/database/database';
+
 @Component({
   templateUrl: "app.html"
 })
@@ -16,7 +18,8 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    private databaseProvider: DatabaseProvider
   ) {
     this.initializeApp();
 
@@ -26,6 +29,8 @@ export class MyApp {
       { title: "Input Event", component: "InputEventPage" },
       { title: "Template Form", component: "TemplateFormPage" },
       { title: "Reactive Form", component: "ReactiveFormPage" },
+      { title: "Native Storage", component: "NativeStoragePage" },
+      { title: "SQLite Storage", component: "SqliteStoragePage" }
     ];
   }
 
@@ -35,6 +40,8 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.databaseProvider.initDB();
     });
   }
 

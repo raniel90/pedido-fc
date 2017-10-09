@@ -9,6 +9,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MyApp } from './app.component';
+import { DatabaseProvider } from '../providers/database/database';
 
 @NgModule({
   declarations: [MyApp],
@@ -19,7 +20,8 @@ import { MyApp } from './app.component';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    BarcodeScanner
+    BarcodeScanner,
+    DatabaseProvider
   ]
 })
 export class AppModule { }
