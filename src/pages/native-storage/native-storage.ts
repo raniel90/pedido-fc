@@ -25,6 +25,7 @@ export class NativeStoragePage {
 
   async ionViewDidLoad() {
     await this.inicializarStorage();
+    this.itemsStorage = await this.getItems();
   }
 
   async onSubmit() {
@@ -50,7 +51,7 @@ export class NativeStoragePage {
 
   inserirItem(value) {
     this.nativeStorage
-      .setItem("items", { property: value })
+      .setItem("items", JSON.stringify(value))
       .then(
         () => console.log("Stored item!"),
         error => console.error("Error storing item", error)
@@ -59,7 +60,8 @@ export class NativeStoragePage {
 
   async getItems() {
     try {
-      return await this.nativeStorage.getItem("items");
+      let data = await this.nativeStorage.getItem("items");
+      return JSON.parse(data);
     } catch (err) {
       console.log(err);
     }

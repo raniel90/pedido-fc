@@ -13,7 +13,7 @@
   <form [formGroup]="inputForm">
     <ion-grid>
       <ion-item>
-        <ion-label color="fc" floating>Input Native Storage</ion-label>
+        <ion-label color="fc" floating>Input SQLite Storage</ion-label>
         <ion-input formControlName="input" type="text" required></ion-input>
       </ion-item>
 
@@ -27,9 +27,6 @@
   <ion-list *ngFor="let item of items">
     <ion-col>
       {{ item.nome }}
-    </ion-col>
-    <ion-col>
-      <button ion-item>Remover</button>
     </ion-col>
   </ion-list>
 
