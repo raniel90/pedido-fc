@@ -4,6 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Nav, Platform } from 'ionic-angular';
 
 import { ItemOrm } from './../domain/item-orm.domain';
+import { BluebirdProvider } from './../providers/bluebird/bluebird.provider';
+import { HoneywellProvider } from './../providers/honeywell/honeywell.provider';
 import { ORMProvider } from './../providers/orm/orm.provider';
 import { SQLiteProvider } from './../providers/sqlite/sqlite.provider';
 
@@ -24,7 +26,9 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     private sqLiteProvider: SQLiteProvider,
-    private ormProvider: ORMProvider
+    private ormProvider: ORMProvider,
+    private honeywellProvider: HoneywellProvider,
+    private bluebirdProvider: BluebirdProvider
   ) {
     this.initializeApp();
 
@@ -50,6 +54,19 @@ export class MyApp {
 
       this.sqLiteProvider.initDB();
       this.ormProvider.initDB(this.domains);
+
+      if (this.platform.is("cordova")) {
+        /**
+         * Init Honeywell Scanner
+         */
+        this.honeywellProvider.onBarcodeEvent();
+        this.honeywellProvider.onFailureEvent();
+
+        /**
+         * Init Bluebird Scanner
+         */
+        this.bluebirdProvider.registerBluebirdBarcodeScanner();
+      }
     });
   }
 

@@ -9,6 +9,8 @@ import { SQLite } from '@ionic-native/sqlite';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
+import { BluebirdProvider } from '../providers/bluebird/bluebird.provider';
+import { HoneywellProvider } from '../providers/honeywell/honeywell.provider';
 import { ORMProvider } from '../providers/orm/orm.provider';
 import { SQLiteProvider } from './../providers/sqlite/sqlite.provider';
 import { MyApp } from './app.component';
@@ -31,7 +33,9 @@ import { MyApp } from './app.component';
     BarcodeScanner,
     SQLiteProvider,
     ORMProvider,
-    SQLite
+    SQLite,
+    HoneywellProvider,
+    BluebirdProvider
   ]
 })
 export class AppModule {}
