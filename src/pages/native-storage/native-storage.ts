@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NativeStorage } from '@ionic-native/native-storage';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { NativeStorageProvider } from './../../providers/native-storage/native-storage.provider';
 
 @IonicPage()
 @Component({
@@ -15,7 +16,7 @@ export class NativeStoragePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private nativeStorage: NativeStorage,
+    private nativeStorageProvider: NativeStorageProvider,
     public formBuilder: FormBuilder
   ) {
     this.inputForm = formBuilder.group({
@@ -24,46 +25,27 @@ export class NativeStoragePage {
   }
 
   async ionViewDidLoad() {
-    await this.inicializarStorage();
-    this.itemsStorage = await this.getItems();
+    await this.nativeStorageProvider.inicializarStorage("items", []);
+    this.itemsStorage = await this.nativeStorageProvider.getDataNativeStorage(
+      "items"
+    );
   }
 
   async onSubmit() {
-    this.itemsStorage = await this.getItems();
+    this.itemsStorage = await this.nativeStorageProvider.getDataNativeStorage(
+      "items"
+    );
 
     if (this.itemsStorage == undefined || this.itemsStorage == null) {
       this.itemsStorage = [];
     }
 
     this.itemsStorage.push(this.inputForm.value.input);
-    this.inserirItem(this.itemsStorage);
+    this.nativeStorageProvider.insertDataNativeStorage(
+      "items",
+      this.itemsStorage
+    );
 
     this.inputForm.reset();
-  }
-
-  async inicializarStorage() {
-    try {
-      this.nativeStorage.getItem("items");
-    } catch (err) {
-      this.inserirItem([]);
-    }
-  }
-
-  inserirItem(value) {
-    this.nativeStorage
-      .setItem("items", JSON.stringify(value))
-      .then(
-        () => console.log("Stored item!"),
-        error => console.error("Error storing item", error)
-      );
-  }
-
-  async getItems() {
-    try {
-      let data = await this.nativeStorage.getItem("items");
-      return JSON.parse(data);
-    } catch (err) {
-      console.log(err);
-    }
   }
 }

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar color="white">
+    <button ion-button menuToggle>
+              <ion-icon color="exemplo" name="menu"></ion-icon>
+            </button>
+    <ion-title>ORM Storage</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="inputForm">
+    <ion-grid>
+      <ion-item>
+        <ion-label color="fc" floating>ORM Storage</ion-label>
+        <ion-input formControlName="input" type="text" required></ion-input>
+      </ion-item>
+
+      <button (click)="onSubmit()" [disabled]="inputForm.status=='INVALID'" ion-button>
+        Adicionar item
+      </button>
+    </ion-grid>
+  </form>
+
+
+  <ion-list>
+    <button ion-item *ngFor="let item of itemsORM">
+        {{ item.name}}
+      </button>
+  </ion-list>
+
+</ion-content>

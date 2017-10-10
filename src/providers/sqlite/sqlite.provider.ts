@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SqlDatabase } from 'ionix-sqlite';
 
 @Injectable()
-export class DatabaseProvider {
+export class SQLiteProvider {
   private dbPromise: Promise<SqlDatabase>;
 
   initDB() {

@@ -3,7 +3,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Nav, Platform } from 'ionic-angular';
 
-import { DatabaseProvider } from './../providers/database/database';
+import { ItemOrm } from './../domain/item-orm.domain';
+import { ORMProvider } from './../providers/orm/orm.provider';
+import { SQLiteProvider } from './../providers/sqlite/sqlite.provider';
 
 @Component({
   templateUrl: "app.html"
@@ -15,11 +17,14 @@ export class MyApp {
 
   pages: Array<{ title: string; component: any }>;
 
+  domains = [{ entity: ItemOrm, tableName: "item_orm" }];
+
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    private databaseProvider: DatabaseProvider
+    private sqLiteProvider: SQLiteProvider,
+    private ormProvider: ORMProvider
   ) {
     this.initializeApp();
 
@@ -30,7 +35,9 @@ export class MyApp {
       { title: "Template Form", component: "TemplateFormPage" },
       { title: "Reactive Form", component: "ReactiveFormPage" },
       { title: "Native Storage", component: "NativeStoragePage" },
-      { title: "SQLite Storage", component: "SqliteStoragePage" }
+      { title: "SQLite Storage", component: "SqliteStoragePage" },
+      { title: "ORM Storage", component: "OrmStoragePage" },
+      { title: "Image Header", component: "ImageHeaderPage" }
     ];
   }
 
@@ -41,7 +48,8 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      this.databaseProvider.initDB();
+      this.sqLiteProvider.initDB();
+      this.ormProvider.initDB(this.domains);
     });
   }
 
