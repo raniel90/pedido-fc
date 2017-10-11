@@ -54,19 +54,6 @@ export class MyApp {
 
       this.sqLiteProvider.initDB();
       this.ormProvider.initDB(this.domains);
-
-      if (this.platform.is("cordova")) {
-        /**
-         * Init Honeywell Scanner
-         */
-        this.honeywellProvider.onBarcodeEvent();
-        this.honeywellProvider.onFailureEvent();
-
-        /**
-         * Init Bluebird Scanner
-         */
-        this.bluebirdProvider.registerBluebirdBarcodeScanner();
-      }
     });
   }
 

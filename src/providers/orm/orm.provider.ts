@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { createConnection } from 'ionic-orm-2';
 import { getConnectionManager } from 'ionic-orm-2';
 
 @Injectable()
 export class ORMProvider {
-  //private ORMDriverType: string = "ionic-sqlite";
-  private ORMDriverType: string = "websql";
+  private ORMDriverType: string = "ionic-sqlite";
   private ORMDatabaseName: string = "fc-orm.db";
 
-  constructor() {}
+  constructor(private platform: Platform) {
+    if (!platform.is("cordova")) {
+      this.ORMDriverType = "websql";
+      console.info("[TRINITY ORM] Using websql driver");
+    } else {
+      console.info("[TRINITY ORM] Using ionic-sqlite driver");
+    }
+  }
 
   async initDB(domains: any[]): Promise<any> {
     let domainsArray = [];
@@ -31,10 +38,10 @@ export class ORMProvider {
       },
       entities: domainsArray,
       logging: {
-        logFailedQueryError: true,
-        logQueries: true,
-        logSchemaCreation: true,
-        logOnlyFailedQueries: true
+        logFailedQueryError: false,
+        logQueries: false,
+        logSchemaCreation: false,
+        logOnlyFailedQueries: false
       },
       autoSchemaSync: true
     };

@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Platform } from 'ionic-angular';
 
 declare var Honeywell: any;
 
 @Injectable()
 export class HoneywellProvider {
-  constructor() {}
+  constructor(private platform: Platform) {
+    if (platform.is("cordova")) {
+      this.onBarcodeEvent();
+      this.onFailureEvent();
+    }
+  }
 
   /**
    *

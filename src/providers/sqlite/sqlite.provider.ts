@@ -5,6 +5,8 @@ import { SqlDatabase } from 'ionix-sqlite';
 export class SQLiteProvider {
   private dbPromise: Promise<SqlDatabase>;
 
+  constructor() {}
+
   initDB() {
     const itemTable = `
       CREATE TABLE IF NOT EXISTS item (
@@ -35,6 +37,4 @@ export class SQLiteProvider {
       return items;
     });
   }
-
-  constructor() {}
 }

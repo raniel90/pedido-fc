@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Platform } from 'ionic-angular';
 
 declare var window: any;
 declare var bluebirdBarcodeScanner: any;
 
 @Injectable()
 export class BluebirdProvider {
-  constructor() {}
+  constructor(private platform: Platform) {
+    if (this.platform.is("cordova")) {
+      this.registerBluebirdBarcodeScanner();
+    }
+  }
 
   registerBluebirdBarcodeScanner() {
     if (window.bluebirdBarcodeScanner) {
