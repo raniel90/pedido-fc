@@ -24,7 +24,6 @@ export class BluebirdProvider {
   }
 
   loadBarcode(barcode) {
-    alert("[BLUEBIRD] barcode read : " + barcode);
     console.log("[BLUEBIRD] barcode read : " + barcode);
   }
 }

@@ -25,11 +25,9 @@ export class HoneywellProvider {
     if (Honeywell != undefined) {
       Honeywell.onBarcodeEvent(
         function(data) {
-          alert("[HONEYWELL] onBarcodeEvent: " + JSON.stringify(data));
           console.log("[HONEYWELL] onBarcodeEvent", data);
         },
         function(reason) {
-          alert("[HONEYWELL] onBarcodeEvent: " + JSON.stringify(reason));
           console.log("[HONEYWELL] onBarcodeEvent", reason);
         }
       );
@@ -50,11 +48,9 @@ export class HoneywellProvider {
     if (Honeywell != undefined) {
       Honeywell.onFailureEvent(
         function(failure) {
-          alert("[HONEYWELL] onFailureEvent: " + JSON.stringify(failure));
           console.log("[HONEYWELL] onFailureEvent", failure);
         },
         function(reason) {
-          alert("[HONEYWELL] onFailureEvent: " + JSON.stringify(reason));
           console.log("[HONEYWELL] onFailureEvent", reason);
         }
       );

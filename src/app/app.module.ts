@@ -1,9 +1,10 @@
 import { ErrorHandler, NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -35,7 +36,8 @@ import { MyApp } from './app.component';
     ORMProvider,
     SQLite,
     HoneywellProvider,
-    BluebirdProvider
+    BluebirdProvider,
+    GoogleAnalytics
   ]
 })
 export class AppModule {}
