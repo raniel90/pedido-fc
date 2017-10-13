@@ -19,11 +19,14 @@
   <ion-searchbar></ion-searchbar>
 
   <ion-row padding *ngFor="let comment of comments">
-    <ion-col>
+    <ion-col col-3>
       {{comment.name}}
     </ion-col>
-    <ion-col>
+    <ion-col col-3>
       <button (click)="detalharProduto(comment)" ion-button color="fc">Detalhar produto</button>
+    </ion-col>
+    <ion-col col-3>
+      <button (click)="compartilhar(comment)" ion-button color="fc">Compartilhar</button>
     </ion-col>
   </ion-row>
 

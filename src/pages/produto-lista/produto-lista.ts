@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { NetworkProvider } from './../../providers/network/network.provider';
 import { ProdutoProvider } from './../../providers/produto/produto';
 
 @IonicPage()
@@ -12,29 +14,39 @@ import { ProdutoProvider } from './../../providers/produto/produto';
 export class ProdutoListaPage {
   produtos = [];
   comments = [];
-  exibeBarcodeScanner: boolean = false
+  exibeBarcodeScanner: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private produtoProvider: ProdutoProvider,
-    private barcodeScanner: BarcodeScanner
-  ) { }
+    private barcodeScanner: BarcodeScanner,
+    private networkProvider: NetworkProvider,
+    public events: Events,
+    private socialSharing: SocialSharing
+  ) {}
 
-  ionViewCanEnter() {
-    console.log("entrou ionViewCanEnter");
+  ionViewDidEnter() {
+    this.events.publish("activePage", "ProdutoListaPage");
   }
 
   async ionViewDidLoad() {
-
-    console.log("entrou ionViewDidLoad");
     try {
-      this.produtos = await this.produtoProvider.get("/posts");
+      //TO DO - IONIC LOADING INIT
 
-      this.comments = await this.produtoProvider.get("/comments");
-      console.log(this.comments);
+      if (this.networkProvider.checkConnection()) {
+        this.networkProvider.getCurrentSSID();
+        this.comments = await this.produtoProvider.get("/comments");
+
+        //TODO - IONIC LOADING FINISH
+      } else {
+        alert("Sem conexão com a internet");
+        //TODO - IONIC LOADING FINISH
+        //TO DO - SHOW DIALOG
+      }
     } catch (err) {
-      //TO DO - error handling
+      //TODO - IONIC LOADING FINISH
+      //TO DO - SHOW DIALOG WITH API ERROR
     }
   }
 
@@ -51,5 +63,9 @@ export class ProdutoListaPage {
         alert(err);
       }
     );
+  }
+
+  compartilhar(comment) {
+    this.socialSharing.share(comment.name);
   }
 }

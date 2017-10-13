@@ -4,7 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { OneSignal } from '@ionic-native/onesignal';
+import { SocialSharing } from '@ionic-native/social-sharing';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -12,6 +15,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { BluebirdProvider } from '../providers/bluebird/bluebird.provider';
 import { HoneywellProvider } from '../providers/honeywell/honeywell.provider';
+import { NetworkProvider } from '../providers/network/network.provider';
 import { ORMProvider } from '../providers/orm/orm.provider';
 import { SQLiteProvider } from './../providers/sqlite/sqlite.provider';
 import { MyApp } from './app.component';
@@ -37,7 +41,11 @@ import { MyApp } from './app.component';
     SQLite,
     HoneywellProvider,
     BluebirdProvider,
-    GoogleAnalytics
+    GoogleAnalytics,
+    Geolocation,
+    NetworkProvider,
+    SocialSharing,
+    OneSignal
   ]
 })
 export class AppModule {}

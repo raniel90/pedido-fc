@@ -3,16 +3,16 @@ import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
+import { environments } from './../../environments/environments';
+
 @Injectable()
 export class ProdutoProvider {
-  private URL_ROOT = "https://jsonplaceholder.typicode.com";
-
   constructor(public http: Http) {}
 
   get(url) {
     return new Promise<any>((resolve, reject) => {
       this.http
-        .get(this.URL_ROOT + url)
+        .get(environments.URL_ROOT + url)
         .map(responseData => responseData.json())
         .subscribe(
           responseData => {

@@ -1,31 +1,26 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events, IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
-/**
- * Generated class for the InputEventPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicGenericPage } from './../ionic-generic/ionic-generic';
 
 @IonicPage()
 @Component({
-  selector: 'page-input-event',
-  templateUrl: 'input-event.html',
+  selector: "page-input-event",
+  templateUrl: "input-event.html"
 })
-export class InputEventPage {
+export class InputEventPage extends IonicGenericPage {
+  valorDigitado: string = "";
 
-  valorDigitado: string = ""
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InputEventPage');
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public events: Events,
+    public viewCtrl: ViewController
+  ) {
+    super(navCtrl, navParams, events, viewCtrl);
   }
 
   exibirValorDigitado(event) {
-    this.valorDigitado = event.target.value
+    this.valorDigitado = event.target.value;
   }
-
 }

@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { OneSignal } from '@ionic-native/onesignal';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Nav, Platform } from 'ionic-angular';
+import { Events, Nav, Platform } from 'ionic-angular';
 
 import { ItemOrm } from './../domain/item-orm.domain';
+import { environments } from './../environments/environments';
 import { BluebirdProvider } from './../providers/bluebird/bluebird.provider';
 import { HoneywellProvider } from './../providers/honeywell/honeywell.provider';
 import { ORMProvider } from './../providers/orm/orm.provider';
@@ -30,7 +32,9 @@ export class MyApp {
     private ormProvider: ORMProvider,
     private honeywellProvider: HoneywellProvider,
     private bluebirdProvider: BluebirdProvider,
-    private ga: GoogleAnalytics
+    private ga: GoogleAnalytics,
+    public events: Events,
+    private oneSignal: OneSignal
   ) {
     this.initializeApp();
 
@@ -43,7 +47,8 @@ export class MyApp {
       { title: "Native Storage", component: "NativeStoragePage" },
       { title: "SQLite Storage", component: "SqliteStoragePage" },
       { title: "ORM Storage", component: "OrmStoragePage" },
-      { title: "Image Header", component: "ImageHeaderPage" }
+      { title: "Image Header", component: "ImageHeaderPage" },
+      { title: "Geolocation", component: "GeolocationPage" }
     ];
   }
 
@@ -58,7 +63,15 @@ export class MyApp {
       this.sqLiteProvider.initDB();
       this.ormProvider.initDB(this.domains);
 
+      /**
+       * Registro do evento que checa a página ativa no app e envia esta informação
+       * para o Google Analytics
+       */
+      this.setActivePage();
+
       this.startTrackGoogleAnalytics();
+
+      this.initOneSignal();
     });
   }
 
@@ -70,12 +83,43 @@ export class MyApp {
 
   startTrackGoogleAnalytics() {
     this.ga
-      .startTrackerWithId("UA-107922563-1")
+      .startTrackerWithId(environments.GA_TRACKER_ID)
       .then(() => {
         console.log("Google analytics is ready now");
-        this.ga.trackView("test");
         this.ga.setAppVersion("0.0.1");
       })
       .catch(e => console.log("Error starting GoogleAnalytics", e));
+  }
+
+  setActivePage() {
+    this.events.subscribe("activePage", (activePage: string) => {
+      if (activePage != null) {
+        console.log(activePage);
+        if (this.platform.is("cordova")) {
+          this.ga.trackView(activePage);
+        }
+      }
+    });
+  }
+
+  initOneSignal() {
+    this.oneSignal.startInit(
+      "1c283a3e-e95a-4d82-acd3-73251feb165f",
+      "898128186875"
+    );
+
+    this.oneSignal.inFocusDisplaying(
+      this.oneSignal.OSInFocusDisplayOption.InAppAlert
+    );
+
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+    });
+
+    this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
+    });
+
+    this.oneSignal.endInit();
   }
 }
